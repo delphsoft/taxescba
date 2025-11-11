@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Impuestos en Servicios Córdoba 2025 - @molinadjuan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    @media print {
+      .no-print { display: none; }
+      body { background: white; }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 to-purple-100 min-h-screen p-6">
+  <div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+
+    <!-- TÍTULO -->
+    <h1 class="text-3xl md:text-5xl font-extrabold text-center text-indigo-700 mb-4">
+      Impuestos en Servicios Públicos - Córdoba 2025
+    </h1>
+    <p class="text-center text-lg text-gray-600 mb-10">@molinadjuan • Noviembre 2025</p>
+
+    <!-- TABLA -->
+    <div class="overflow-x-auto mb-12">
+      <table class="w-full table-auto border-collapse text-sm md:text-base">
+        <thead class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+          <tr>
+            <th class="p-3 text-left">Servicio</th>
+            <th class="p-3 text-left">Ítem</th>
+            <th class="p-3 text-center">%</th>
+            <th class="p-3 text-left">Detalle</th>
+            <th class="p-3 text-center">Ej. $50.000</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <!-- LUZ -->
+          <tr class="bg-indigo-50"><td rowspan="5" class="font-bold text-indigo-700 p-3">LUZ (EPEC)</td><td>IVA</td><td class="text-center">21%</td><td>Valor Agregado</td><td class="text-right font-semibold">$10.500</td></tr>
+          <tr class="bg-indigo-50"><td>FODEP</td><td class="text-center">10%</td><td>Fondo energético</td><td class="text-right">$5.000</td></tr>
+          <tr class="bg-indigo-50"><td>Municipal</td><td class="text-center">9,9%</td><td>Alumbrado</td><td class="text-right">$4.950</td></tr>
+          <tr class="bg-indigo-50"><td>ERSEP</td><td class="text-center">0,4%</td><td>Regulación</td><td class="text-right">$200</td></tr>
+          <tr class="bg-indigo-50"><td>Seguridad</td><td class="text-center">0,1%</td><td>Inspecciones</td><td class="text-right">$50</td></tr>
+          <tr class="bg-indigo-100 font-bold"><td colspan="4" class="text-right p-3">Total LUZ</td><td class="text-right text-red-600">~44%</td></tr>
+
+          <!-- AGUA -->
+          <tr class="bg-blue-50"><td rowspan="4" class="font-bold text-blue-700 p-3">AGUA</td><td>IVA</td><td class="text-center">21%</td><td>Valor Agregado</td><td class="text-right">$10.500</td></tr>
+          <tr class="bg-blue-50"><td>Ingresos Brutos</td><td class="text-center">4%</td><td>Servicio</td><td class="text-right">$2.000</td></tr>
+          <tr class="bg-blue-50"><td>Municipal</td><td class="text-center">16%</td><td>Infraestructura</td><td class="text-right">$8.000</td></tr>
+          <tr class="bg-blue-50"><td>ERSEP</td><td class="text-center">~3%</td><td>Regulación</td><td class="text-right">$1.250</td></tr>
+          <tr class="bg-blue-100 font-bold"><td colspan="4" class="text-right p-3">Total AGUA</td><td class="text-right text-red-600">~55%</td></tr>
+
+          <!-- GAS -->
+          <tr class="bg-orange-50"><td rowspan="5" class="font-bold text-orange-700 p-3">GAS (Ecogas)</td><td>IVA</td><td class="text-center">21%</td><td>Valor Agregado</td><td class="text-right">$10.500</td></tr>
+          <tr class="bg-orange-50"><td>Ingresos Brutos</td><td class="text-center">~5%</td><td>Transporte</td><td class="text-right">$2.250</td></tr>
+          <tr class="bg-orange-50"><td>Fondo Gas</td><td class="text-center">5,64%</td><td>Zona fría</td><td class="text-right">$2.820</td></tr>
+          <tr class="bg-orange-50"><td>Ley 25.413</td><td class="text-center">~2%</td><td>Carga empresa</td><td class="text-right">$750</td></tr>
+          <tr class="bg-orange-50"><td>Municipal</td><td class="text-center"><1%</td><td>Ocupación</td><td class="text-right"><$500</td></tr>
+          <tr class="bg-orange-100 font-bold"><td colspan="4" class="text-right p-3">Total GAS</td><td class="text-right text-red-600">~34%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- GRÁFICOS -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-2xl shadow-lg">
+        <h3 class="text-xl font-bold text-center mb-4 text-indigo-800">LUZ (44% impuestos)</h3>
+        <canvas id="chartLuz"></canvas>
+      </div>
+      <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-2xl shadow-lg">
+        <h3 class="text-xl font-bold text-center mb-4 text-blue-800">AGUA (55% impuestos)</h3>
+        <canvas id="chartAgua"></canvas>
+      </div>
+      <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-2xl shadow-lg">
+        <h3 class="text-xl font-bold text-center mb-4 text-orange-800">GAS (34% impuestos)</h3>
+        <canvas id="chartGas"></canvas>
+      </div>
+    </div>
+
+    <!-- COMPARATIVO -->
+    <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-2xl shadow-lg mb-12">
+      <h3 class="text-2xl font-bold text-center mb-6 text-purple-800">Comparativo de Impuestos</h3>
+      <canvas id="chartComparativo"></canvas>
+    </div>
+
+    <!-- BOTÓN PDF -->
+    <div class="text-center no-print">
+      <button onclick="window.print()" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-12 rounded-full text-xl transition shadow-lg">
+        Descargar PDF / Imprimir
+      </button>
+    </div>
+
+    <footer class="text-center text-gray-500 text-sm mt-12 no-print">
+      <p>© 2025 @molinadjuan • Datos actualizados noviembre 2025 • Cautelares judiciales vigentes</p>
+    </footer>
+  </div>
+
+  <script>
+    // Gráficos con Chart.js
+    const ctxLuz = document.getElementById('chartLuz').getContext('2d');
+    new Chart(ctxLuz, {
+      type: 'doughnut',
+      data: {
+        labels: ['Servicio', 'IVA', 'FODEP', 'Municipal', 'Otros'],
+        datasets: [{ data: [56, 21, 10, 9.9, 3.1], backgroundColor: ['#10B981', '#EF4444', '#F59E0B', '#3B82F6', '#6B7280'] }]
+      },
+      options: { plugins: { legend: { position: 'bottom' } } }
+    });
+
+    const ctxAgua = document.getElementById('chartAgua').getContext('2d');
+    new Chart(ctxAgua, {
+      type: 'doughnut',
+      data: {
+        labels: ['Servicio', 'IVA', 'Municipal', 'IB', 'Otros'],
+        datasets: [{ data: [45, 21, 16, 4, 14], backgroundColor: ['#10B981', '#EF4444', '#3B82F6', '#F59E0B', '#6B7280'] }]
+      },
+      options: { plugins: { legend: { position: 'bottom' } } }
+    });
+
+    const ctxGas = document.getElementById('chartGas').getContext('2d');
+    new Chart(ctxGas, {
+      type: 'doughnut',
+      data: {
+        labels: ['Servicio', 'IVA', 'Fondo Gas', 'IB', 'Otros'],
+        datasets: [{ data: [66, 21, 5.64, 5, 2.36], backgroundColor: ['#10B981', '#EF4444', '#F59E0B', '#3B82F6', '#6B7280'] }]
+      },
+      options: { plugins: { legend: { position: 'bottom' } } }
+    });
+
+    const ctxComp = document.getElementById('chartComparativo').getContext('2d');
+    new Chart(ctxComp, {
+      type: 'bar',
+      data: {
+        labels: ['Luz (EPEC)', 'Agua', 'Gas (Ecogas)'],
+        datasets: [{ label: '% Impuestos', data: [44, 55, 34], backgroundColor: ['#6366F1', '#3B82F6', '#F59E0B'] }]
+      },
+      options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 60 } } }
+    });
+  </script>
+</body>
+</html>
